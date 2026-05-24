@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+
+  --gray-500: #6b7280;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+
+  --blue-200: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --blue-primary: #0275ff;
+
+  --darkbg: #101214;
+  --darksec: #1d1f21;
+  --stroke-dark: #2d3135;
+  --background-white: #ffffff;
+}
+
+@theme {
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+
+  --color-blue-200: var(--blue-200);
+  --color-blue-400: var(--blue-400);
+  --color-blue-500: var(--blue-500);
+  --color-blue-primary: var(--blue-primary);
+
+  --color-darkbg: var(--darkbg);
+  --color-darksec: var(--darksec);
+  --color-stroke-dark: var(--stroke-dark);
+
+
+  --color-background: var(--background-white);
+
+  --font-sans: var(--font-geist-robot);
+  --font-mono: var(--font-geist-mono);
+}
+
+
+body {
+  background: white;
+  color: var(--gray-800);
+  font-family: "Roboto", sans-serif;
+}
+
+.dark body {
+  background: var(--darkbg);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0275ff;
+  border-radius: 9999px;
+  transition: background 0.3s ease;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #52525b;
+}
