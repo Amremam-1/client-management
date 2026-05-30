@@ -9,7 +9,7 @@ export const getProjects = async (
 ): Promise<void> => {
   try {
     const projects = await prisma.project.findMany()
-
+    console.log(projects)
     res.json(projects)
   } catch (error: any) {
     res
