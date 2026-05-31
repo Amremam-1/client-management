@@ -2,8 +2,9 @@ import { useGetTasksQuery, useUpdateTaskStatusMutation } from "@/state/api";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { Task as TaskType } from "@/types";
-import { EllipsisVertical, Plus } from "lucide-react";
+import { EllipsisVertical, MessageSquare, Plus } from "lucide-react";
 import { format } from "date-fns";
+import Image from "next/image";
 
 type BoardViewProps = {
   id: string;
@@ -81,7 +82,7 @@ const TaskColumn = ({
       ref={(instance) => {
         drop(instance);
       }}
-      className={`rounded-lg py-2 xl:px-2 xl:py-4 border${isOver ? "bg-blue-100 dark:bg-neutral-950" : ""}`}
+      className={`rounded-lg py-2 shadow-2xl xl:px-2 xl:py-4 ${isOver ? "bg-blue-100 dark:bg-neutral-950" : ""}`}
     >
       <div className="mb-3 flex w-full shadow-sm">
         <div
@@ -141,25 +142,114 @@ const Task = ({ task }: TaskProps) => {
 
   const PriorityTag = ({ priority }: { priority: TaskType["priority"] }) => {
     return (
-      <div
-        className={`rounded-full px-1 py-2 text-xs font-semibold ${
+      <span
+        className={`rounded px-2.5 py-1 text-xs font-medium ${
           priority === "Urgent"
-            ? "bg-red-200 text-red-700"
+            ? "bg-red-500/15 text-red-500"
             : priority === "High"
-              ? "bg-yellow-200 text-yellow-700"
+              ? "bg-orange-500/15 text-orange-500"
               : priority === "Medium"
-                ? "bg-green-200 text-green-700"
+                ? "bg-yellow-500/15 text-yellow-500"
                 : priority === "Low"
-                  ? "bg-blue-200 text-blue-700"
-                  : "bg-gray-200 text-gray-700"
+                  ? "bg-blue-500/15 text-blue-500"
+                  : "bg-neutral-500/15 text-neutral-500"
         }`}
       >
         {priority}
-      </div>
+      </span>
     );
   };
+  return (
+    <div
+      ref={(instance) => {
+        drag(instance);
+      }}
+      className={`dark:bg-darksec mb-4 rounded-md bg-white shadow ${isDragging ? "opacity-100" : "opacity-100"}`}
+    >
+      {task.attachments && task.attachments.length > 0 && (
+        <Image
+          src={`/${task.attachments[0].fileURL}`}
+          alt={task.attachments[0].fileName || ""}
+          width={400}
+          height={200}
+          loading="lazy"
+          className="h-auto w-full rounded-t-md object-cover"
+        />
+      )}
 
-  return <div></div>;
+      <div className="p-4 md:p-6">
+        <div className="flex items-start justify-between">
+          <div className="flex flex-1 flex-wrap items-center gap-2">
+            {task.priority && <PriorityTag priority={task.priority} />}
+
+            <div className="flex gap-2">
+              {taskTagsSplit.map((tag) => (
+                <div
+                  key={tag}
+                  className="rounded bg-gray-600/40 px-2.5 py-1 text-xs"
+                >
+                  {tag}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button className="flex h-6 w-4 items-center justify-center dark:text-neutral-500">
+            <EllipsisVertical size={26} />
+          </button>
+        </div>
+
+        <div className="my-3 flex items-center justify-between">
+          <h4 className="text-md font-semibold">{task.title}</h4>
+
+          {typeof task.points === "number" && (
+            <div className="text-xs font-semibold">{task.points} Pts</div>
+          )}
+        </div>
+
+        <div className="text-xs font-semibold text-gray-500 dark:text-neutral-500">
+          {formattedStartDate && <span>{formattedStartDate} - </span>}
+          {formattedStartDate && <span>{formattedDueDate}</span>}
+        </div>
+
+        <p className="mt-2 text-sm">{task.description}</p>
+
+        <div className="dark:border-stroke-dark my-4 border-t border-gray-400" />
+
+        {/* User */}
+
+        <div className="flex items-center justify-between">
+          <div className="flex -space-x-3 overflow-hidden">
+            {task.assignee && (
+              <Image
+                src={`/${task.assignee.profilePictureUrl}`}
+                alt={task.assignee.username}
+                width={30}
+                height={30}
+                loading="lazy"
+                className="dark:border-darkbg h-8 w-8 rounded-full border-2 border-white object-cover"
+              />
+            )}
+            {task.author && (
+              <Image
+                src={`/${task.author.profilePictureUrl}`}
+                alt={task.author.username}
+                width={30}
+                height={30}
+                loading="lazy"
+                className="dark:border-darkbg h-8 w-8 rounded-full border-2 border-white object-cover"
+              />
+            )}
+          </div>
+
+          <div className="flex items-center gap-1 text-gray-500 dark:text-neutral-500">
+            <MessageSquare size={18} />
+            <span className="">{numberOfComments}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default BoardView;

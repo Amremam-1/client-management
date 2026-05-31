@@ -9,6 +9,6 @@ const router = Router()
 
 router.get("/", getTasks)
 router.post("/", createTask)
-router.patch("/:taskId/status", updatedTaskStatus)
+router.patch("/:taskId/status", updatedTaskStatus);
 
 export default router
