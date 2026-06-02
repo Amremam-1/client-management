@@ -39,6 +39,13 @@ export enum Priority {
   Backlog = "Backlog",
 }
 
+export interface Comment {
+  id: number;
+  text: string;
+  taskId: number;
+  userId: number;
+}
+
 export interface Task {
   id: string;
   title: string;
@@ -58,5 +65,3 @@ export interface Task {
   attachments?: Attachments[];
   comments?: Comment[];
 }
-
-

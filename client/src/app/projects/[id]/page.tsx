@@ -4,6 +4,7 @@ import ProjectHeader from "@/app/projects/ProjectHeader";
 import { use, useState } from "react";
 import Board from "../Board";
 import { useParams } from "next/navigation";
+import List from "../ListView";
 
 const ProjectPage = () => {
   const params = useParams();
@@ -19,6 +20,10 @@ const ProjectPage = () => {
 
       {activeTab === "Board" && (
         <Board id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+      )}
+
+      {activeTab === "List" && (
+        <List id={id} setIsmodalNewTaskOpen={setIsModalNewTaskOpen} />
       )}
     </div>
   );

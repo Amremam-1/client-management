@@ -2,7 +2,13 @@ import { useGetTasksQuery, useUpdateTaskStatusMutation } from "@/state/api";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { Task as TaskType } from "@/types";
-import { EllipsisVertical, MessageSquare, Plus } from "lucide-react";
+import {
+  CalendarDays,
+  CalendarRange,
+  EllipsisVertical,
+  MessageSquare,
+  Plus,
+} from "lucide-react";
 import { format } from "date-fns";
 import Image from "next/image";
 
@@ -21,7 +27,6 @@ const BoardView = ({ id, setIsModalNewTaskOpen }: BoardViewProps) => {
   } = useGetTasksQuery({ projectId: Number(id) });
 
   const [updateTaskStatus] = useUpdateTaskStatusMutation();
-  console.log(tasks);
 
   const moveTask = (taskId: number, toStatus: string) => {
     updateTaskStatus({ taskId, status: toStatus });
@@ -86,7 +91,7 @@ const TaskColumn = ({
     >
       <div className="mb-3 flex w-full shadow-sm">
         <div
-          className={`w-2 !bg-[${statusColor[status]}] rounded-s-lg`}
+          className={`w-2 rounded-s-lg`}
           style={{ backgroundColor: statusColor[status] }}
         />
 
@@ -136,8 +141,10 @@ const Task = ({ task }: TaskProps) => {
   }));
 
   const taskTagsSplit = task.tags ? task.tags.split(",") : [];
-  const formattedStartDate = task.startDate ? format(task.startDate, "P") : "";
-  const formattedDueDate = task.dueDate ? format(task.dueDate, "P") : "";
+  const formattedStartDate = task.startDate
+    ? format(task.startDate, "MMM dd")
+    : "";
+  const formattedDueDate = task.dueDate ? format(task.dueDate, "MMM dd") : "";
   const numberOfComments = (task.comments && task.comments.length) || 0;
 
   const PriorityTag = ({ priority }: { priority: TaskType["priority"] }) => {
@@ -164,7 +171,7 @@ const Task = ({ task }: TaskProps) => {
       ref={(instance) => {
         drag(instance);
       }}
-      className={`dark:bg-darksec mb-4 rounded-md bg-white shadow ${isDragging ? "opacity-100" : "opacity-100"}`}
+      className={`dark:bg-darksec mb-4 rounded-md bg-white shadow ${isDragging ? "opacity-70" : "opacity-100"}`}
     >
       {task.attachments && task.attachments.length > 0 && (
         <Image
@@ -200,19 +207,30 @@ const Task = ({ task }: TaskProps) => {
         </div>
 
         <div className="my-3 flex items-center justify-between">
-          <h4 className="text-md font-semibold">{task.title}</h4>
+          <h4 className="line-clamp-2 text-base font-semibold">{task.title}</h4>
 
           {typeof task.points === "number" && (
             <div className="text-xs font-semibold">{task.points} Pts</div>
           )}
         </div>
 
-        <div className="text-xs font-semibold text-gray-500 dark:text-neutral-500">
-          {formattedStartDate && <span>{formattedStartDate} - </span>}
-          {formattedStartDate && <span>{formattedDueDate}</span>}
-        </div>
-
         <p className="mt-2 text-sm">{task.description}</p>
+
+        <div className="flex items-center justify-between pt-4 dark:border-neutral-700">
+          <div className="flex items-center gap-2">
+            <CalendarDays size={14} className="text-slate-500" />
+            <span className="text-xs text-slate-500">
+              {task.startDate && formattedStartDate}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <CalendarRange size={14} className="text-slate-500" />
+            <span className="text-xs text-slate-500">
+              {task.dueDate && formattedDueDate}
+            </span>
+          </div>
+        </div>
 
         <div className="dark:border-stroke-dark my-4 border-t border-gray-400" />
 
