@@ -1,10 +1,11 @@
 "use client";
 
 import ProjectHeader from "@/app/projects/ProjectHeader";
-import { use, useState } from "react";
+import { useState } from "react";
 import Board from "../Board";
 import { useParams } from "next/navigation";
 import List from "../ListView";
+import TimeLine from "../TimeLineView";
 
 const ProjectPage = () => {
   const params = useParams();
@@ -24,6 +25,10 @@ const ProjectPage = () => {
 
       {activeTab === "List" && (
         <List id={id} setIsmodalNewTaskOpen={setIsModalNewTaskOpen} />
+      )}
+
+      {activeTab === "TimeLine" && (
+        <TimeLine id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
       )}
     </div>
   );

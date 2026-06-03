@@ -40,7 +40,7 @@ const ProjectHeader = ({ activeTab, setActiveTab }: ProjectHeaderProps) => {
             activeTab={activeTab}
           />
           <TabButton
-            name="Timeline"
+            name="TimeLine"
             icon={<Clock className="h-5 w-5" />}
             setActiveTab={setActiveTab}
             activeTab={activeTab}
