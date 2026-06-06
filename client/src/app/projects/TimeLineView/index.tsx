@@ -2,8 +2,9 @@
 import { useGetTasksQuery } from "@/state/api";
 import { useMemo, useState } from "react";
 import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
-import "gantt-task-react/dist/index.css"
+import "gantt-task-react/dist/index.css";
 import { useAppSelector } from "@/app/redux";
+import { Plus } from "lucide-react";
 
 type TimeLineProps = {
   id: string;
@@ -72,7 +73,7 @@ const TimeLine = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
         </div>
       </div>
 
-      <div className="dark:bg-darksec overflow-hidden rounded-md bg-white py-3 px-2 shadow xl:px-4">
+      <div className="dark:bg-darksec overflow-hidden rounded-md bg-white px-2 py-3 shadow xl:px-4">
         <div className="timeline">
           <Gantt
             tasks={ganttTasks}
@@ -85,8 +86,15 @@ const TimeLine = ({ id, setIsModalNewTaskOpen }: TimeLineProps) => {
         </div>
 
         <div className="px-4 pt-2 pb-2">
-          <button onClick={() => setIsModalNewTaskOpen(true)} className="bg-blue-primary flex cursor-pointer items-center rounded px-3 py-2 text-white transition-all duration-300 ease-in-out hover:bg-blue-600">
-            Add New Task 
+          <button
+            onClick={() => setIsModalNewTaskOpen(true)}
+            className="bg-blue-primary flex cursor-pointer items-center rounded px-3 py-2 text-white transition-all duration-300 ease-in-out hover:bg-blue-600"
+          >
+            Add New Task
+            <Plus
+              className="ms-2 rounded bg-slate-200 text-gray-700"
+              size={15}
+            />
           </button>
         </div>
       </div>

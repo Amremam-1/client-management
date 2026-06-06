@@ -71,7 +71,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
 
         {/* Status && priority && tags*/}
 
-        <div className="flex flex-wrap items-center">
+        <div className="flex flex-wrap gap-2 items-center">
           <div className="flex items-center gap-2">
             <span
               className="h-2.5 w-2.5 rounded-full"
@@ -130,20 +130,20 @@ const TaskCard = ({ task }: TaskCardProps) => {
               {task.author && (
                 <Image
                   src={`/${task.author.profilePictureUrl}`}
-                  alt={task.author.username}
+                  alt={task.author.username || ""}
                   width={28}
                   height={28}
-                  className="h-10 w-10 rounded-full border-2 border-white object-contain dark:border-slate-900"
+                  className="rounded-full border border-white object-contain dark:border-slate-900"
                 />
               )}
 
               {task.assignee && (
                 <Image
                   src={`/${task.assignee.profilePictureUrl}`}
-                  alt={task.assignee.username}
+                  alt={task.assignee.username || ""}
                   width={28}
                   height={28}
-                  className="h-10 w-10 rounded-full border-2 border-white object-contain dark:border-slate-900"
+                  className="rounded-full border border-white object-contain dark:border-slate-900"
                 />
               )}
             </div>

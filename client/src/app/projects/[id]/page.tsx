@@ -6,6 +6,7 @@ import Board from "../Board";
 import { useParams } from "next/navigation";
 import List from "../ListView";
 import TimeLine from "../TimeLineView";
+import TableView from "../TableView";
 
 const ProjectPage = () => {
   const params = useParams();
@@ -17,7 +18,7 @@ const ProjectPage = () => {
   return (
     <div>
       {/* Modal New Task */}
-      <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+      <ProjectHeader id={id} activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab === "Board" && (
         <Board id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
@@ -29,6 +30,9 @@ const ProjectPage = () => {
 
       {activeTab === "TimeLine" && (
         <TimeLine id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
+      )}
+      {activeTab === "Table" && (
+        <TableView id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
       )}
     </div>
   );

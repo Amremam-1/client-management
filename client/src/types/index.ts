@@ -8,7 +8,7 @@ export interface Project {
 
 export interface User {
   id: number;
-  username: string;
+  username?: string;
   email: string;
   profilePictureUrl?: string;
   cognitoId?: string;

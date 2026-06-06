@@ -12,9 +12,10 @@ import {
 interface ProjectHeaderProps {
   activeTab: string;
   setActiveTab: (tabName: string) => void;
+  id: string;
 }
 
-const ProjectHeader = ({ activeTab, setActiveTab }: ProjectHeaderProps) => {
+const ProjectHeader = ({ id, activeTab, setActiveTab }: ProjectHeaderProps) => {
   return (
     <div className="px-4 xl:px-6">
       {/* Modal New Project */}
