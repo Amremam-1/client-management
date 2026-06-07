@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/components/Header";
 import {
   Clock,
@@ -8,20 +9,37 @@ import {
   Share2,
   Table,
 } from "lucide-react";
+import { useState } from "react";
+import ModalNewProject from "./ModalNewProject";
 
 interface ProjectHeaderProps {
   activeTab: string;
   setActiveTab: (tabName: string) => void;
-  id: string;
 }
 
-const ProjectHeader = ({ id, activeTab, setActiveTab }: ProjectHeaderProps) => {
+const ProjectHeader = ({ activeTab, setActiveTab }: ProjectHeaderProps) => {
+  const [isModalNewProjectOpen, setIsModalNewProjectOpen] = useState(false);
+
   return (
     <div className="px-4 xl:px-6">
       {/* Modal New Project */}
+      <ModalNewProject
+        isOpen={isModalNewProjectOpen}
+        onClose={() => setIsModalNewProjectOpen(false)}
+      />
 
       <div className="lg-pt-8 pt-6 pb-6 xl:pb-4">
-        <Header name="Product Desgin Development" />
+        <Header
+          name="Product Desgin Development"
+          buttonComponent={
+            <button
+              className="flex cursor-pointer items-center gap-2 rounded-md bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
+              onClick={() => setIsModalNewProjectOpen(true)}
+            >
+              + Add New Project
+            </button>
+          }
+        />
       </div>
 
       {/* TABS */}

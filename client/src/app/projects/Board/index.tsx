@@ -241,7 +241,7 @@ const Task = ({ task }: TaskProps) => {
             {task.assignee && (
               <Image
                 src={`/${task.assignee.profilePictureUrl}`}
-                alt={task.assignee.username}
+                alt={task.assignee.username || ""}
                 width={30}
                 height={30}
                 loading="lazy"
@@ -251,7 +251,7 @@ const Task = ({ task }: TaskProps) => {
             {task.author && (
               <Image
                 src={`/${task.author.profilePictureUrl}`}
-                alt={task.author.username}
+                alt={task.author.username || ""}
                 width={30}
                 height={30}
                 loading="lazy"

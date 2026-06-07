@@ -1,6 +1,8 @@
+import React from "react";
+
 type HeaderProps = {
   name: string;
-  buttonComponent?: string;
+  buttonComponent?: React.ReactNode;
   textSmall?: boolean;
 };
 

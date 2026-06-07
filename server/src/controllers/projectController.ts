@@ -1,28 +1,28 @@
-import { PrismaClient } from "@prisma/client"
-import { Request, Response } from "express"
+import { PrismaClient } from "@prisma/client";
+import { Request, Response } from "express";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export const getProjects = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
   try {
-    const projects = await prisma.project.findMany()
-    console.log(projects)
-    res.json(projects)
+    const projects = await prisma.project.findMany();
+    console.log(projects);
+    res.json(projects);
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error retrieveing projects :${error.message} ` })
+      .json({ message: `Error retrieveing projects :${error.message} ` });
   }
-}
+};
 
 export const createProject = async (
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> => {
-  const { name, description, startDate, endDate } = req.body
+  const { name, description, startDate, endDate } = req.body;
   try {
     const newProject = await prisma.project.create({
       data: {
@@ -31,11 +31,12 @@ export const createProject = async (
         startDate,
         endDate,
       },
-    })
-    res.status(201).json(newProject)
+    });
+    res.status(201).json(newProject);
   } catch (error: any) {
     res
       .status(500)
-      .json({ message: `Error creating a project: ${error.message}` })
+      .json({ message: `Error creating a project: ${error.message}` });
+    console.log(error);
   }
-}
+};

@@ -18,7 +18,7 @@ const ProjectPage = () => {
   return (
     <div>
       {/* Modal New Task */}
-      <ProjectHeader id={id} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab === "Board" && (
         <Board id={id} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />
