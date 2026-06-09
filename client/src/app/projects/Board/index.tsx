@@ -107,11 +107,14 @@ const TaskColumn = ({
           </h1>
 
           <div className="flex items-center gap-2">
-            <button className="cursor-pointer">
+            {/* <button className="cursor-pointer">
               <EllipsisVertical size={20} />
-            </button>
+            </button> */}
 
-            <button className="dark:bg-darkbg flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg bg-gray-200 shadow">
+            <button
+              onClick={() => setIsModalNewTaskOpen(true)}
+              className="dark:bg-darkbg flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg bg-gray-200 shadow"
+            >
               <Plus size={18} />
             </button>
           </div>

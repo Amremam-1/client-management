@@ -27,7 +27,7 @@ export interface Attachments {
 export enum Status {
   ToDo = "To Do",
   WorkInProgress = "Work In Progress",
-  UderReview = "Under Review",
+  UnderReview = "Under Review",
   Completed = "completed",
 }
 
@@ -55,10 +55,10 @@ export interface Task {
   tags?: string;
   startDate?: string;
   dueDate?: string;
-  points?: string;
-  projectId: string;
-  authorUserId?: string;
-  assignedUserId?: string;
+  points?: number;
+  projectId: number;
+  authorUserId?: number;
+  assignedUserId?: number;
 
   author?: User;
   assignee?: User;

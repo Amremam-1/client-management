@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import List from "../ListView";
 import TimeLine from "../TimeLineView";
 import TableView from "../TableView";
+import ModalNewTask from "@/components/ModalNewTask";
 
 const ProjectPage = () => {
   const params = useParams();
@@ -18,6 +19,12 @@ const ProjectPage = () => {
   return (
     <div>
       {/* Modal New Task */}
+      <ModalNewTask
+        isOpen={isModalNewTaskOpen}
+        onClose={() => setIsModalNewTaskOpen(false)}
+        projectId={id}
+      />
+
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {activeTab === "Board" && (

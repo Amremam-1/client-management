@@ -21,7 +21,18 @@ const List = ({ id, setIsmodalNewTaskOpen }: ListProps) => {
   return (
     <div className="px-4 pb-8 xl:px-6">
       <div className="pt-5">
-        <Header name="List View" />
+        <Header
+          name="List View"
+          textSmall
+          buttonComponent={
+            <button
+              className="bg-blue-primary cursor-pointer rounded px-3 py-1 text-white hover:bg-blue-600"
+              onClick={() => setIsmodalNewTaskOpen(true)}
+            >
+              Add New Task
+            </button>
+          }
+        />
       </div>
 
       <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:gap-6">
