@@ -15,7 +15,6 @@ const prisma = new client_1.PrismaClient();
 const getProjects = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const projects = yield prisma.project.findMany();
-        console.log(projects);
         res.json(projects);
     }
     catch (error) {

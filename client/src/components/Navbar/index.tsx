@@ -27,14 +27,14 @@ const NavBar = () => {
         )}
 
         {/* search Item */}
-        <div className="relative flex h-min w-50">
+        {/* <div className="relative flex h-min w-50">
           <Search className="absolute top-1/2 left-1 h-4 w-4 -translate-y-1/2 transform cursor-pointer text-gray-700 dark:text-gray-100" />
           <input
             type="search"
             placeholder="search..."
             className="dark:border-stroke-dark dark:bg-darkbg text-darksec rounded border border-gray-300 bg-gray-100 p-1.5 pl-8 placeholder-gray-500 focus:outline-none dark:text-gray-100"
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="flex items-center gap-2">
