@@ -1,10 +1,10 @@
-import { Project, searchResults, Task } from "@/types";
+import { Project, searchResults, Task, User } from "@/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["Projects", "Tasks"], // here where call the endpoint where response some data which i store data here in indentifer
+  tagTypes: ["Projects", "Tasks", "Users"], // here where call the endpoint where response some data which i store data here in indentifer
   // here we add endpoints i created in backend where i call
   endpoints: (build) => ({
     // for get data we use  .query
@@ -55,9 +55,16 @@ export const api = createApi({
         { type: "Tasks", id: taskId },
       ],
     }),
-
+    // Search
     search: build.query<searchResults, string>({
       query: (query) => `search?query=${query}`,
+    }),
+
+    //Get Users
+
+    getUsers: build.query<User[], void>({
+      query: () => "users",
+      providesTags: ["Users"],
     }),
   }),
 });
@@ -69,4 +76,5 @@ export const {
   useUpdateTaskStatusMutation,
   useCreateTasksMutation,
   useSearchQuery,
+  useGetUsersQuery,
 } = api;

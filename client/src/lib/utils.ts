@@ -1,5 +1,5 @@
 export const dataGridClassNames =
-  "border border-gray-200 bg-white shadow dark:border-stroke-dark dark:bg-dark-secondary dark:text-gray-200";
+  "border border-gray-200 bg-white shadow dark:border-darksec dark:bg-darksec dark:text-gray-200";
 
 export const dataGridStyles = (isDarkMode: boolean) => {
   return {
@@ -25,14 +25,30 @@ export const dataGridStyles = (isDarkMode: boolean) => {
     },
     "& .MuiDataGrid-row": {
       color: `${isDarkMode ? "#a3a3a3" : ""}`,
-      borderBottom: `1px solid ${isDarkMode ? "#2d3135" : "#e5e7eb"}`,
+      borderBottom: `0.5px solid ${isDarkMode ? "#2d3135" : "#e5e7eb"}`,
       backgroundColor: `${isDarkMode ? "#1d1f21" : "white"}`,
       "&:hover": {
         backgroundColor: isDarkMode ? "#2a2d31" : "#f9fafb",
       },
     },
+    "& .MuiDataGrid-row.Mui-selected": {
+      backgroundColor: isDarkMode ? "#374151" : "#dbeafe",
+    },
+    "& .MuiDataGrid-row.Mui-selected:hover": {
+      backgroundColor: isDarkMode ? "#4b5563" : "#bfdbfe",
+    },
     "& .MuiDataGrid-withBorderColor": {
-      borderColor: `${isDarkMode ? "#2d3135" : "e5e7eb"}`,
+      borderColor: `${isDarkMode ? "#2d313d" : "#e5e7eb"}`,
+    },
+    "& .MuiDataGrid-toolbar": {
+      borderColor: `${isDarkMode ? "#3b82f6" : "#93c5fd"}`,
+    },
+    "&.MuiDataGrid-root": {
+      border: `1px solid ${isDarkMode ? "#2d3135" : "#e5e7eb"}`,
+    },
+
+    "& .MuiDataGrid-scrollbar": {
+      height: "4px",
     },
   };
 };
