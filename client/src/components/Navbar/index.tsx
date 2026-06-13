@@ -49,7 +49,7 @@ const NavBar = () => {
           )}
         </button>
         <Link
-          href="/setting"
+          href="/settings"
           className="dark:border-stroke-dark dark:bg-darkbg h-min w-min rounded border border-gray-300 bg-gray-50 p-1 transition-all duration-300 hover:shadow-xl"
         >
           <Settings className="h-5 w-5 text-gray-700 transition-colors duration-300 ease-in dark:text-gray-100" />
