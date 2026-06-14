@@ -30,6 +30,28 @@ const taskColumns: GridColDef[] = [
 
 const COLORS = ["#0088FE", "#7AE2CF", "#00C49F", "#FF8042"];
 
+function objOfMatches(
+  arr1: string[],
+  arr2: string[],
+  callback: (value: string) => string,
+): Record<string, string> {
+  const result: Record<string, string> = {};
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (callback(arr1[i]) === arr2[i]) {
+      result[arr1[i]] = arr2[i];
+    }
+  }
+
+  return result;
+}
+const arr1 = ["hi", "howdy", "bye", "later", "hello"];
+const arr2 = ["HI", "Howdy", "BYE", "LATER", "hello"];
+
+const upperCase = (str: string): string => str.toUpperCase();
+
+console.log(objOfMatches(arr1, arr2, upperCase));
+
 const HomePage = () => {
   const { data: projects, isLoading } = useGetProjectsQuery();
   const [selectProjectId, setSelectProjectId] = useState<number>(1);

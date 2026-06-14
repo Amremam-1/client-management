@@ -10,10 +10,10 @@ import { Priority, Status } from "@/types";
 type props = {
   isOpen: boolean;
   onClose: () => void;
-  projectId: string;
+  id?: string | null;
 };
 
-const ModalNewTask = ({ isOpen, onClose, projectId }: props) => {
+const ModalNewTask = ({ isOpen, onClose, id = null }: props) => {
   const [createTasks, { isLoading }] = useCreateTasksMutation();
 
   const [title, setTitle] = useState("");
@@ -26,10 +26,11 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: props) => {
   const [dueDate, setDueDate] = useState("");
   const [authorUserId, setAuthorUserId] = useState("");
   const [assignedUserId, setAssignedUserId] = useState("");
+  const [projectId, setProjectId] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!title) return;
+    if (!title || !authorUserId || !(id !== null || projectId)) return;
 
     const formatStartDate = formatISO(new Date(startDate), {
       representation: "complete",
@@ -49,7 +50,7 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: props) => {
         dueDate: formatDueDate,
         assignedUserId: parseInt(assignedUserId),
         authorUserId: parseInt(authorUserId),
-        projectId: Number(projectId),
+        projectId: id !== null ? Number(id) : Number(projectId),
       }).unwrap();
 
       // reset form
@@ -62,6 +63,7 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: props) => {
       setDueDate("");
       setAssignedUserId("");
       setAuthorUserId("");
+      setProjectId("");
 
       onClose();
     } catch (error) {
@@ -76,7 +78,7 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: props) => {
     "mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white focus:outline-none";
 
   const isFormValid = () => {
-    return title;
+    return title && authorUserId && !(id !== null || projectId);
   };
 
   return (
@@ -159,6 +161,16 @@ const ModalNewTask = ({ isOpen, onClose, projectId }: props) => {
           value={assignedUserId}
           onChange={(e) => setAssignedUserId(e.target.value)}
         />
+
+        {id === null && (
+          <input
+            type="text"
+            placeholder="Project ID"
+            className={inputClassName}
+            value={projectId}
+            onChange={(e) => setProjectId(e.target.value)}
+          />
+        )}
 
         <button
           type="submit"
