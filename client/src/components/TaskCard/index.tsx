@@ -71,7 +71,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
 
         {/* Status && priority && tags*/}
 
-        <div className="flex flex-wrap gap-2 items-center">
+        <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center gap-2">
             <span
               className="h-2.5 w-2.5 rounded-full"
@@ -95,9 +95,9 @@ const TaskCard = ({ task }: TaskCardProps) => {
 
           <div className="ms-3 flex items-center gap-2">
             {task.tags &&
-              task.tags.split(",").map((tag) => (
+              task.tags.split(",").map((tag, index) => (
                 <span
-                  key={tag}
+                  key={`${tag.trim()}-${index}`}
                   className="rounded-full bg-slate-200 px-2.5 py-1 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300"
                 >
                   {tag}

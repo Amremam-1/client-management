@@ -43,7 +43,13 @@ const TimeLine = () => {
     }));
   };
 
-  if (isLoading) return <div>Loading..</div>;
+  if (isLoading)
+    return (
+      <div className="flex items-center gap-2">
+        Loading...
+        <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-blue-500"></div>
+      </div>
+    );
   if (error) return <div>An error occurred while fetching tasks</div>;
 
   return (
