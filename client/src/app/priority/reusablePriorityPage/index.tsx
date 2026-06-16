@@ -59,13 +59,13 @@ const columns: GridColDef[] = [
     field: "author",
     headerName: "Author",
     width: 150,
-    renderCell: (params) => params.value.username || "Unknown",
+    renderCell: (params) => params.value || "Unknown",
   },
   {
     field: "assignee",
     headerName: "Assignee",
     width: 150,
-    renderCell: (params) => params.value.username || "Unassigned",
+    renderCell: (params) => params.value || "Unassigned",
   },
 ];
 
@@ -139,7 +139,7 @@ const ReusablePriorityPage = ({ priority }: props) => {
       {isLoading ? (
         <div>Loading tasks...</div>
       ) : view === "list" ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filteredTasks?.map((task: Task) => (
             <TaskCard key={task.id} task={task} />
           ))}
